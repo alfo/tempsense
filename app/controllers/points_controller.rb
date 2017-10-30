@@ -1,5 +1,7 @@
 class PointsController < ApplicationController
 
+  protect_from_forgery :except => [:create]
+
   def index
 
     @points = Point.all
@@ -7,6 +9,8 @@ class PointsController < ApplicationController
   end
 
   def create
+
+    puts params
 
     @point = Point.create({data: params[:data]})
 

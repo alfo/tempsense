@@ -3,5 +3,5 @@ Rails.application.routes.draw do
 
   root 'points#index'
 
-  resources :points
+  post 'points/create'
 end
