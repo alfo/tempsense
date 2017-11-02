@@ -10,7 +10,7 @@ def send_to_server(message)
 
   begin
 
-    uri = URI.parse('http://localhost:4567/data')
+    uri = URI.parse('http://tempsense.herokuapp.com/points/create')
     http = Net::HTTP.new(uri.host, uri.port)
     request = Net::HTTP::Post.new(uri.path)
     request['data'] = message
@@ -27,7 +27,7 @@ def send_to_server(message)
 
     # If we get an exception, it's safe to assume the server
     # didn't respond to our HTTP request
-    puts "No connection to server..."
+    puts "No connection to server... #{message}"
 
   end
 
