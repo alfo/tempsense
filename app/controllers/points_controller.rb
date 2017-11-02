@@ -8,6 +8,12 @@ class PointsController < ApplicationController
 
   end
 
+  def json
+
+    render json: Point.all
+
+  end
+
   def create
 
     puts params

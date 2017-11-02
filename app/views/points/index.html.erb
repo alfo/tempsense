@@ -1,3 +1,38 @@
+<canvas id="tempChart" width="400" height="400"></canvas>
+
+<script>
+
+  var results;
+
+  var ctx = document.getElementById("tempChart").getContext("2d");
+
+  var jsonData = $.ajax({
+      url: '/points/json',
+      dataType: 'json',
+    }).done(function (results) {
+
+      results.forEach(function(point) {
+        labels.push(new Date(point.timestamp).formatMMDDYYYY());
+        data.push(parseFloat(point.data));
+      });
+
+      var myChart = new Chart(ctx, {
+          type: 'line',
+          data: [1, 2, 3],
+          options: {
+              scales: {
+                  yAxes: [{
+                      ticks: {
+                          beginAtZero:true
+                      }
+                  }]
+              }
+          }
+      });
+
+    });
+</script>
+
 <% @points.each do |p| %>
   <%= p.data %><br>
 <% end %>

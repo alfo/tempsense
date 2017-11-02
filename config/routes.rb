@@ -3,5 +3,7 @@ Rails.application.routes.draw do
 
   root 'points#index'
 
+  get 'points/json'
   post 'points/create'
+
 end
