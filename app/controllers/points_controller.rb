@@ -10,14 +10,14 @@ class PointsController < ApplicationController
 
   def json
 
+    # Self-explanatory
     render json: Point.all
 
   end
 
   def create
 
-    puts params
-
+    # POST Endpoint for receiving data from the client
     @point = Point.create({data: params[:data]})
 
   end

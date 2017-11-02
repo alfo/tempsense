@@ -1,38 +1,61 @@
-<canvas id="tempChart" width="400" height="400"></canvas>
+<div id="chartContainer" style="height: 50vh; width: 100%;"></div>
 
-<script>
+<script type="text/javascript">
 
-  var results;
+  var dataPoints = [];
+  var totalPoints = 0;
 
-  var ctx = document.getElementById("tempChart").getContext("2d");
+  var chart = new CanvasJS.Chart("chartContainer", {
+      animationEnabled: true,
+      title:{
+          text: "Temperature Reading from Arduino"
+      },
+      axisX: {
+        valueFormatString: "HH:mm DD MMM"
+      },
+      axisY: {
+        title: "Temperature (in °C)",
+        includeZero: true,
+        interlacedColor: "#F0F0F0"
+      },
+      data: [{
+      type: "line",
+          dataPoints: dataPoints,
+      }]
+  });
 
-  var jsonData = $.ajax({
-      url: '/points/json',
-      dataType: 'json',
-    }).done(function (results) {
+  // When called, it loads the dataset again from the database via
+  // the JSON endpoint /points/json (as defined in points_controller.rb)
+  // It then also calls to redraw the graph on screen
+  function refreshGraph() {
 
-      results.forEach(function(point) {
-        labels.push(new Date(point.timestamp).formatMMDDYYYY());
-        data.push(parseFloat(point.data));
-      });
+    $.getJSON({
+        url: "/points/json",
+      }, function(data) {
+        $.each(data, function(key, value){
+            // Only add the point if it's not already in the list
+            if (key > totalPoints) {
+              dataPoints.push({x: new Date(value["created_at"]), y: parseFloat(value["data"])});
+            }
+        });
 
-      var myChart = new Chart(ctx, {
-          type: 'line',
-          data: [1, 2, 3],
-          options: {
-              scales: {
-                  yAxes: [{
-                      ticks: {
-                          beginAtZero:true
-                      }
-                  }]
-              }
-          }
-      });
+        // Set the totalPoints for the next time we refresh the graph
+        totalPoints = dataPoints.length;
 
+        chart.render();
     });
-</script>
 
-<% @points.each do |p| %>
-  <%= p.data %><br>
-<% end %>
+  }
+
+  $(function() {
+
+    // Run the refreshGraph every 5s
+    setInterval(refreshGraph, 5000);
+
+    // But also run it on pageload
+    refreshGraph();
+
+  });
+
+
+</script>
