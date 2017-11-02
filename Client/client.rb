@@ -10,11 +10,8 @@ def send_to_server(message)
 
   begin
 
-    uri = URI.parse('http://tempsense.herokuapp.com/points/create')
-    http = Net::HTTP.new(uri.host, uri.port)
-    request = Net::HTTP::Post.new(uri.path)
-    request['data'] = message
-    result = http.request(request)
+    # Send a POST request to the server with the data attached
+    result = postData = Net::HTTP.post_form(URI.parse('http://tempsense.herokuapp.com/points/create'), {'data': message})
 
     # Did the server respond with 200 OK?
     if result.kind_of? Net::HTTPSuccess
