@@ -51,8 +51,7 @@ void loop() {
   steinhart = 1.0 / steinhart;
   steinhart -= 273.15;
 
-  // Loop runs every 10ms, but only want to output to serial every 1000ms (every 100 cycles)
   Serial.println(steinhart);
-  
-  delay(1000 - num_samples * 10);
+
+  delay(10000);
 }
