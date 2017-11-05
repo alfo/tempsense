@@ -32,7 +32,7 @@ void loop() {
   // Read the sensor num_sample times
   for (int i; i < num_samples; i++) {
     average += analogRead(thermistor_pin);
-    delay(10);
+    delay(100);
   }
 
   // Average our readings to account for some noise
