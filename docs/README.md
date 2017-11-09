@@ -14,6 +14,8 @@ There are four parts to the code in this repository:
 
 * The OpenSCAD Arduino mount in `case/`
 
+![Circuit](./circuit.JPG)
+
 To get started, connect the Arduino to your computer via the USB cable. Then launch the client:
 
     cd client
