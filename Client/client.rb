@@ -1,9 +1,33 @@
 # Require rubygems
 require 'serialport'
 require 'net/http'
+require 'fileutils'
+require './color'
 
-# Instantiate serial connection to Arduino
-serial = SerialPort.new("/dev/cu.usbmodem14141", 9600, 8, 1, SerialPort::NONE)
+serial = false
+
+# Scan through open serial ports that match Arduino's signature
+# (This only works on Mac)
+Dir.glob("/dev/cu.usbmodem*").each do |port|
+
+  # Skip if we've already established the serial connection
+  next if serial
+
+  # Try to instantiate serial connection to Arduino
+  begin
+    serial = SerialPort.new(port, 9600, 8, 1, SerialPort::NONE)
+  rescue
+    puts "Skipped #{port}"
+    next
+  end
+end
+
+# If we've got this far without opening a port, we're never going to
+unless serial
+  # It didn't work :(
+  puts "Could not open any serial connections :(".pink
+  return
+end
 
 # Responsible for sending received values to the server via HTTP
 def send_to_server(message)
