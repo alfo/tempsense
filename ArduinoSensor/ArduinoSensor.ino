@@ -9,7 +9,9 @@ const int series_resistor = 10000;
 
 // Variables for input smoothing
 const int num_samples = 5;
-unsigned int loop_counter = 0;
+
+// Interval between datapoints in seconds
+const int interval = 10;
 
 void setup() {
 
@@ -24,8 +26,6 @@ void setup() {
 }
 
 void loop() {
-
-  loop_counter++;
 
   float average;
 
@@ -51,7 +51,8 @@ void loop() {
   steinhart = 1.0 / steinhart;
   steinhart -= 273.15;
 
+  // Send the data appended with '\n'
   Serial.println(steinhart);
 
-  delay(10000);
+  delay(interval * 1000);
 }
