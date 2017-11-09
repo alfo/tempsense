@@ -35,9 +35,9 @@ def send_to_server(message)
   begin
 
     # Send a POST request to the server with the data attached
-    result = postData = Net::HTTP.post_form(URI.parse('http://tempsense.herokuapp.com/points/create'), {'data': message})
+    result = Net::HTTP.post_form(URI.parse('http://tempsense.herokuapp.com/points/create'), {'data': message})
 
-    # Did the server respond with 200 OK?
+    # Did the server respond with 200-series OK?
     if result.kind_of? Net::HTTPSuccess
       puts "Sent #{message} to server"
     else
