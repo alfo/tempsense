@@ -16,7 +16,9 @@ There are four parts to the code in this repository:
 
 To get started, connect the Arduino to your computer via the USB cable. Then launch the client:
 
-    cd client && ruby client.rb
+    cd client
+    bundle install
+    ruby client.rb
 
 You can then view the data as a graph at [http://tempsense.herokuapp.com](http://tempsense.herokuapp.com)
 
