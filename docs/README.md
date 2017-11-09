@@ -16,6 +16,8 @@ There are four parts to the code in this repository:
 
 ![Circuit](./circuit.JPG)
 
+Demo video can be found [here](https://mediacentral.ucl.ac.uk/Play/9734)
+
 To get started, connect the Arduino to your computer via the USB cable. Then launch the client:
 
     cd client
