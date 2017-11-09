@@ -1,5 +1,9 @@
 # README
 
+## Project Description
+
+The general purpose of this project is to collect temperature data from an Arduino, store that data in the cloud, and then live-graph it on a publicly available web page.
+
 There are four parts to the code in this repository:
 
 * The Arduino C Code (in `ArduinoSensor/`)
@@ -9,6 +13,12 @@ There are four parts to the code in this repository:
 * The back end server Ruby code (data model, endpoint logic, and database/environment configuration) in the project root
 
 * The OpenSCAD Arduino mount in `case/`
+
+To get started, connect the Arduino to your computer via the USB cable. Then launch the client:
+
+    cd client && ruby client.rb
+
+You can then view the data as a graph at [http://tempsense.herokuapp.com](http://tempsense.herokuapp.com)
 
 ## Server Notes
 

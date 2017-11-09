@@ -54,5 +54,12 @@ void loop() {
   // Send the data appended with '\n'
   Serial.println(steinhart);
 
+  // Blink the status LED so we know data's been sent
+  digitalWrite(led_pin, HIGH);
+  delay(100);
+  digitalWrite(led_pin, LOW);
+  
+
+  // Convert the interval from seconds to miliseconds
   delay(interval * 1000);
 }
