@@ -34,7 +34,7 @@ The Ruby client can be started by simply with:
 
 The client (which contains a `while true do` loop), will run forever waiting for new data from the Arduino. It cannot run at the same time as the Arduino Terminal is open, as they cannot both bind to the Arduino's serial port.
 
-The client assumes that the Arduino can be found at `/dev/cu.usbmodem14141`, but this can be easily modified.
+The client auto-searches for open serial ports (macOS-specific code), but this can also be replaced with a declaration for Linux/Windows.
 
 ## Arduino Notes
 
