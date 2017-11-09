@@ -38,4 +38,4 @@ The client assumes that the Arduino can be found at `/dev/cu.usbmodem14141`, but
 
 ## Arduino Notes
 
-The
+The Arduino is what determines the interval at which data is taken from the thermistor. Currently this is set to 10 seconds, which is useful for live demo purposes, but it could equally be set as low as 1s or as high as needed for data collection over long periods of time.
